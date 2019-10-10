@@ -1,5 +1,6 @@
 # sqlalchemy-tutorial
 Exemplos de utilização de SQL Alchemy, framework de mapeamento objeto-relacional (ORM) de código aberto.
+A apresentação teórica encontra-se no link https://docs.google.com/presentation/d/e/2PACX-1vTv-4outHuT9EVDWNL003H6NSG196sVK-7a9FmGmhemNg9O6lwmPfJFkUr1h6JjA0LkO_SbI1St_2YU/pub?start=false&loop=false&delayms=3000
 
 ## Como utilizar
 ```
