@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1-beta" last-position="0,0" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="filme" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="260" y="360"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="titulo" not-null="true">
+		<type name="varchar" length="150"/>
+	</column>
+	<column name="data_lancamento" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="pk_filme" type="pk-constr" table="public.filme">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="ator" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1100" y="380"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="150"/>
+	</column>
+	<column name="nascimento" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="pk_ator" type="pk-constr" table="public.ator">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="filme_ator" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="720" y="380"/>
+	<column name="fk_filme" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="fk_ator" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="pk_filme_ator" type="pk-constr" table="public.filme_ator">
+		<columns names="fk_filme,fk_ator" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="contato" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="720" y="220"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="telefone" not-null="true">
+		<type name="varchar" length="15"/>
+	</column>
+	<column name="endereco" not-null="true">
+		<type name="varchar" length="150"/>
+	</column>
+	<column name="fk_ator" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="pk_contato" type="pk-constr" table="public.contato">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="duble" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="720" y="520"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="150"/>
+	</column>
+	<column name="ativo" not-null="true">
+		<type name="bool" length="0"/>
+	</column>
+	<column name="fk_ator" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="pk_duble" type="pk-constr" table="public.duble">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="fk_filme" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.filme" table="public.filme_ator">
+	<columns names="fk_filme" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ator" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ator" table="public.filme_ator">
+	<columns names="fk_ator" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ator" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ator" table="public.contato">
+	<columns names="fk_ator" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ator" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.ator" table="public.duble">
+	<columns names="fk_ator" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_filme_ator_filme" type="relfk"
+	 src-table="public.filme_ator"
+	 dst-table="public.filme"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_filme_ator_ator" type="relfk"
+	 src-table="public.filme_ator"
+	 dst-table="public.ator"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="5.40906" y="-50.2417"/>
+	</label>
+</relationship>
+
+<relationship name="rel_contato_ator" type="relfk"
+	 src-table="public.contato"
+	 dst-table="public.ator"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="28.5614" y="-36.6016"/>
+	</label>
+</relationship>
+
+<relationship name="rel_duble_ator" type="relfk"
+	 src-table="public.duble"
+	 dst-table="public.ator"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="19.6894" y="-9.10156"/>
+	</label>
+</relationship>
+
+</dbmodel>

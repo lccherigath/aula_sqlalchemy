@@ -54,7 +54,7 @@ dwayne_duble = Duble(nome='John Roe', ativo=True, ator=dwayne_johnson)
 mark_duble = Duble(nome='Richard Roe', ativo=True, ator=mark_wahlberg)
 
 try:
-    Persistindo dados
+    # Persistindo dados
     session.add(identidade_bourne)
     session.add(velozes_e_furiosos_7)
     session.add(sem_dor_sem_ganho)
@@ -81,7 +81,6 @@ try:
     session.add_all([matt_duble, dwayne_duble, mark_duble])
     
     session.commit()
-    session.close
 
 except Exception as e:
     print('Error: ', e)
